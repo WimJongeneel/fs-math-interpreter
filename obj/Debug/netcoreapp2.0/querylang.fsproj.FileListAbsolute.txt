@@ -1,0 +1,10 @@
+/home/wim/projects/fslexyacc-test/obj/Debug/netcoreapp2.0/querylang.fsprojAssemblyReference.cache
+/home/wim/projects/fslexyacc-test/obj/Debug/netcoreapp2.0/querylang.AssemblyInfoInputs.cache
+/home/wim/projects/fslexyacc-test/obj/Debug/netcoreapp2.0/querylang.AssemblyInfo.fs
+/home/wim/projects/fslexyacc-test/bin/Debug/netcoreapp2.0/querylang.deps.json
+/home/wim/projects/fslexyacc-test/bin/Debug/netcoreapp2.0/querylang.runtimeconfig.json
+/home/wim/projects/fslexyacc-test/bin/Debug/netcoreapp2.0/querylang.runtimeconfig.dev.json
+/home/wim/projects/fslexyacc-test/bin/Debug/netcoreapp2.0/querylang.dll
+/home/wim/projects/fslexyacc-test/bin/Debug/netcoreapp2.0/querylang.pdb
+/home/wim/projects/fslexyacc-test/obj/Debug/netcoreapp2.0/querylang.dll
+/home/wim/projects/fslexyacc-test/obj/Debug/netcoreapp2.0/querylang.pdb

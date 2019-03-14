@@ -1,0 +1,37 @@
+﻿{
+
+module Lexer
+
+// Opens methods related to fslex.exe
+open Microsoft.FSharp.Text.Lexing
+open System
+
+let lexeme = LexBuffer.LexemeString
+
+let newline (lexbuf: LexBuffer<_>) = 
+  lexbuf.StartPos <- lexbuf.StartPos.NextLine
+
+exception SyntaxError of string
+}
+
+
+// Regular expressions
+let whitespace = [' ' '\t' ]
+let newline = ('\n' | '\r' '\n')
+let id = [ 'a'-'z' 'A'-'Z' '_' '0'-'9' ]
+let date_part = ("weeks" | "days" | "months" | "years")
+let int = ['-' '+']? ['0'-'9']+
+  
+rule tokenstream = 
+parse
+  | "("           { Parser.LEFT_PARENTHES }
+  | ")"           { Parser.RIGTH_PARENTHES }
+  | "+"           { Parser.PLUS }
+  | "/"           { Parser.DIVIDE }
+  | "-"           { Parser.MINUS }
+  | "*"           { Parser.TIMES }
+  | int           { Parser.INT (int (lexeme lexbuf)) }
+  | whitespace    { tokenstream lexbuf }
+  | newline       { newline lexbuf; tokenstream lexbuf }
+  | _             { raise (Exception (sprintf "SyntaxError: Unexpected char: '%s' Line: %d Column: %d" (lexeme lexbuf) (lexbuf.StartPos.Line+1) lexbuf.StartPos.Column)) }
+  | eof           { Parser.EOF }
