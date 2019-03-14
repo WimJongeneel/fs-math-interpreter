@@ -19,8 +19,10 @@ module Main =
   [<EntryPoint>]
   let main argv =
 
-
-    dumpRes "100 + 5 * 10"
-    dumpRes "(100 + 5) * 10"
-
+    if argv.Length > 0
+      then dumpRes argv.[0]
+      else
+        dumpRes "100 + 5 * 10"
+        dumpRes "(100 + 5) * 10"
+  
     0
