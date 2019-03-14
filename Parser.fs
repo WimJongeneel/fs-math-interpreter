@@ -14,22 +14,22 @@ open Expression
 type token = 
   | EOF
   | INT of ( int32 )
+  | LEFT_PARENTHES
   | RIGTH_PARENTHES
   | MINUS
   | PLUS
   | TIMES
   | DIVIDE
-  | LEFT_PARENTHES
 // This type is used to give symbolic names to token indexes, useful for error messages
 type tokenId = 
     | TOKEN_EOF
     | TOKEN_INT
+    | TOKEN_LEFT_PARENTHES
     | TOKEN_RIGTH_PARENTHES
     | TOKEN_MINUS
     | TOKEN_PLUS
     | TOKEN_TIMES
     | TOKEN_DIVIDE
-    | TOKEN_LEFT_PARENTHES
     | TOKEN_end_of_input
     | TOKEN_error
 // This type is used to give symbolic names to token indexes, useful for error messages
@@ -45,24 +45,24 @@ let tagOfToken (t:token) =
   match t with
   | EOF  -> 0 
   | INT _ -> 1 
-  | RIGTH_PARENTHES  -> 2 
-  | MINUS  -> 3 
-  | PLUS  -> 4 
-  | TIMES  -> 5 
-  | DIVIDE  -> 6 
-  | LEFT_PARENTHES  -> 7 
+  | LEFT_PARENTHES  -> 2 
+  | RIGTH_PARENTHES  -> 3 
+  | MINUS  -> 4 
+  | PLUS  -> 5 
+  | TIMES  -> 6 
+  | DIVIDE  -> 7 
 
 // This function maps integer indexes to symbolic token ids
 let tokenTagToTokenId (tokenIdx:int) = 
   match tokenIdx with
   | 0 -> TOKEN_EOF 
   | 1 -> TOKEN_INT 
-  | 2 -> TOKEN_RIGTH_PARENTHES 
-  | 3 -> TOKEN_MINUS 
-  | 4 -> TOKEN_PLUS 
-  | 5 -> TOKEN_TIMES 
-  | 6 -> TOKEN_DIVIDE 
-  | 7 -> TOKEN_LEFT_PARENTHES 
+  | 2 -> TOKEN_LEFT_PARENTHES 
+  | 3 -> TOKEN_RIGTH_PARENTHES 
+  | 4 -> TOKEN_MINUS 
+  | 5 -> TOKEN_PLUS 
+  | 6 -> TOKEN_TIMES 
+  | 7 -> TOKEN_DIVIDE 
   | 10 -> TOKEN_end_of_input
   | 8 -> TOKEN_error
   | _ -> failwith "tokenTagToTokenId: bad token"
@@ -90,30 +90,30 @@ let token_to_string (t:token) =
   match t with 
   | EOF  -> "EOF" 
   | INT _ -> "INT" 
+  | LEFT_PARENTHES  -> "LEFT_PARENTHES" 
   | RIGTH_PARENTHES  -> "RIGTH_PARENTHES" 
   | MINUS  -> "MINUS" 
   | PLUS  -> "PLUS" 
   | TIMES  -> "TIMES" 
   | DIVIDE  -> "DIVIDE" 
-  | LEFT_PARENTHES  -> "LEFT_PARENTHES" 
 
 // This function gets the data carried by a token as an object
 let _fsyacc_dataOfToken (t:token) = 
   match t with 
   | EOF  -> (null : System.Object) 
   | INT _fsyacc_x -> Microsoft.FSharp.Core.Operators.box _fsyacc_x 
+  | LEFT_PARENTHES  -> (null : System.Object) 
   | RIGTH_PARENTHES  -> (null : System.Object) 
   | MINUS  -> (null : System.Object) 
   | PLUS  -> (null : System.Object) 
   | TIMES  -> (null : System.Object) 
   | DIVIDE  -> (null : System.Object) 
-  | LEFT_PARENTHES  -> (null : System.Object) 
 let _fsyacc_gotos = [| 0us; 65535us; 1us; 65535us; 0us; 1us; 2us; 65535us; 0us; 2us; 16us; 4us; 4us; 65535us; 0us; 9us; 5us; 6us; 7us; 8us; 16us; 9us; 6us; 65535us; 0us; 14us; 5us; 14us; 7us; 14us; 10us; 11us; 12us; 13us; 16us; 14us; |]
 let _fsyacc_sparseGotoTableRowOffsets = [|0us; 1us; 3us; 6us; 11us; |]
 let _fsyacc_stateToProdIdxsTableElements = [| 1us; 0us; 1us; 0us; 3us; 1us; 2us; 3us; 1us; 1us; 3us; 2us; 3us; 9us; 1us; 2us; 3us; 2us; 5us; 6us; 1us; 3us; 3us; 3us; 5us; 6us; 3us; 4us; 5us; 6us; 1us; 5us; 1us; 5us; 1us; 6us; 1us; 6us; 1us; 7us; 1us; 8us; 1us; 9us; 1us; 9us; |]
 let _fsyacc_stateToProdIdxsTableRowOffsets = [|0us; 2us; 4us; 8us; 10us; 14us; 16us; 20us; 22us; 26us; 30us; 32us; 34us; 36us; 38us; 40us; 42us; 44us; |]
 let _fsyacc_action_rows = 18
-let _fsyacc_actionTableElements = [|2us; 32768us; 1us; 15us; 7us; 16us; 0us; 49152us; 3us; 32768us; 0us; 3us; 3us; 5us; 4us; 7us; 0us; 16385us; 3us; 32768us; 2us; 17us; 3us; 5us; 4us; 7us; 2us; 32768us; 1us; 15us; 7us; 16us; 2us; 16386us; 5us; 10us; 6us; 12us; 2us; 32768us; 1us; 15us; 7us; 16us; 2us; 16387us; 5us; 10us; 6us; 12us; 2us; 16388us; 5us; 10us; 6us; 12us; 2us; 32768us; 1us; 15us; 7us; 16us; 0us; 16389us; 2us; 32768us; 1us; 15us; 7us; 16us; 0us; 16390us; 0us; 16391us; 0us; 16392us; 2us; 32768us; 1us; 15us; 7us; 16us; 0us; 16393us; |]
+let _fsyacc_actionTableElements = [|2us; 32768us; 1us; 15us; 2us; 16us; 0us; 49152us; 3us; 32768us; 0us; 3us; 4us; 5us; 5us; 7us; 0us; 16385us; 3us; 32768us; 3us; 17us; 4us; 5us; 5us; 7us; 2us; 32768us; 1us; 15us; 2us; 16us; 2us; 16386us; 6us; 10us; 7us; 12us; 2us; 32768us; 1us; 15us; 2us; 16us; 2us; 16387us; 6us; 10us; 7us; 12us; 2us; 16388us; 6us; 10us; 7us; 12us; 2us; 32768us; 1us; 15us; 2us; 16us; 0us; 16389us; 2us; 32768us; 1us; 15us; 2us; 16us; 0us; 16390us; 0us; 16391us; 0us; 16392us; 2us; 32768us; 1us; 15us; 2us; 16us; 0us; 16393us; |]
 let _fsyacc_actionTableRowOffsets = [|0us; 3us; 4us; 8us; 9us; 13us; 16us; 19us; 22us; 25us; 28us; 31us; 32us; 35us; 36us; 37us; 38us; 41us; |]
 let _fsyacc_reductionSymbolCounts = [|1us; 2us; 3us; 3us; 1us; 3us; 3us; 1us; 1us; 3us; |]
 let _fsyacc_productionToNonTerminalTable = [|0us; 1us; 2us; 2us; 2us; 3us; 3us; 3us; 4us; 4us; |]
@@ -134,10 +134,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 24 "./language/Parser.fsy"
+# 23 "./language/Parser.fsy"
                                              _1 
                    )
-# 24 "./language/Parser.fsy"
+# 23 "./language/Parser.fsy"
                  :  Expr ));
 # 142 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
@@ -146,10 +146,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 27 "./language/Parser.fsy"
+# 26 "./language/Parser.fsy"
                                                                          Minus (_1, _3) 
                    )
-# 27 "./language/Parser.fsy"
+# 26 "./language/Parser.fsy"
                  : 'expression));
 # 154 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
@@ -158,10 +158,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 28 "./language/Parser.fsy"
+# 27 "./language/Parser.fsy"
                                                                          Plus (_1, _3) 
                    )
-# 28 "./language/Parser.fsy"
+# 27 "./language/Parser.fsy"
                  : 'expression));
 # 166 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
@@ -169,10 +169,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 29 "./language/Parser.fsy"
+# 28 "./language/Parser.fsy"
                                                                          _1 
                    )
-# 29 "./language/Parser.fsy"
+# 28 "./language/Parser.fsy"
                  : 'expression));
 # 177 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
@@ -181,10 +181,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 32 "./language/Parser.fsy"
+# 31 "./language/Parser.fsy"
                                                                          Times (_1, _3) 
                    )
-# 32 "./language/Parser.fsy"
+# 31 "./language/Parser.fsy"
                  : 'expression1));
 # 189 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
@@ -193,10 +193,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 33 "./language/Parser.fsy"
+# 32 "./language/Parser.fsy"
                                                                          Divide (_1, _3) 
                    )
-# 33 "./language/Parser.fsy"
+# 32 "./language/Parser.fsy"
                  : 'expression1));
 # 201 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
@@ -204,10 +204,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 34 "./language/Parser.fsy"
+# 33 "./language/Parser.fsy"
                                                                          _1 
                    )
-# 34 "./language/Parser.fsy"
+# 33 "./language/Parser.fsy"
                  : 'expression1));
 # 212 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
@@ -215,10 +215,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 37 "./language/Parser.fsy"
+# 36 "./language/Parser.fsy"
                                                                          Int _1 
                    )
-# 37 "./language/Parser.fsy"
+# 36 "./language/Parser.fsy"
                  : 'expression2));
 # 223 "Parser.fs"
         (fun (parseState : Microsoft.FSharp.Text.Parsing.IParseState) ->
@@ -226,10 +226,10 @@ let _fsyacc_reductions ()  =    [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 38 "./language/Parser.fsy"
+# 37 "./language/Parser.fsy"
                                                                          Parentheses _2 
                    )
-# 38 "./language/Parser.fsy"
+# 37 "./language/Parser.fsy"
                  : 'expression2));
 |]
 # 235 "Parser.fs"

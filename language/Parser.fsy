@@ -8,8 +8,7 @@ open Expression
 %start start
 
 // Regular tokens
-%token LEFT_PARENTHES
-%token RIGTH_PARENTHES MINUS PLUS TIMES DIVIDE
+%token LEFT_PARENTHES RIGTH_PARENTHES MINUS PLUS TIMES DIVIDE
 %token < int32 > INT
 %token EOF
 

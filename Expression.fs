@@ -1,10 +1,5 @@
 module Expression
 
-  let internal prop (p: string list) = 
-    if p.IsEmpty then """ * """
-    else if p.Length = 1 then p.[0] |> sprintf """ "%s" """
-    else (p.Item (p.Length - 2), p.Item (p.Length - 1)) ||> sprintf """ "%s"."%s" """
-
   type Expr =
     | Int         of int32
     | Parentheses of Expr
@@ -12,7 +7,6 @@ module Expression
     | Times       of Expr * Expr
     | Divide      of Expr * Expr
     | Minus       of Expr * Expr
-
 
   let rec compileExpr (e: Expr) = 
     match e with

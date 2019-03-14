@@ -3,21 +3,21 @@ module Parser
 type token = 
   | EOF
   | INT of ( int32 )
+  | LEFT_PARENTHES
   | RIGTH_PARENTHES
   | MINUS
   | PLUS
   | TIMES
   | DIVIDE
-  | LEFT_PARENTHES
 type tokenId = 
     | TOKEN_EOF
     | TOKEN_INT
+    | TOKEN_LEFT_PARENTHES
     | TOKEN_RIGTH_PARENTHES
     | TOKEN_MINUS
     | TOKEN_PLUS
     | TOKEN_TIMES
     | TOKEN_DIVIDE
-    | TOKEN_LEFT_PARENTHES
     | TOKEN_end_of_input
     | TOKEN_error
 type nonTerminalId = 
